@@ -11,14 +11,14 @@ if __name__ == '__main__':
     pm25 = get_data_from_mongodb(parameter="pm25", collection='openaq2021')
 
     # Save data in CSV files
-    save_csv(data=no2, filename='no2_2021.csv')
-    save_csv(data=pm10, filename='pm10_2021.csv')
-    save_csv(data=pm25, filename='pm25_2021.csv')
+    save_csv(data=no2, filename='files/no2_2021.csv')
+    save_csv(data=pm10, filename='files/pm10_2021.csv')
+    save_csv(data=pm25, filename='files/pm25_2021.csv')
 
     # Draw maps from CSV files
-    draw_map(filename='no2_2021.csv')
-    draw_map(filename='pm10_2021.csv')
-    draw_map(filename='pm25_2021.csv')
+    draw_map(filename='files/no2_2021.csv')
+    draw_map(filename='files/pm10_2021.csv')
+    draw_map(filename='files/pm25_2021.csv')
 
     # --- 2022 --- #
     # Retrieve filtered data from database
@@ -27,11 +27,11 @@ if __name__ == '__main__':
     pm25 = get_data_from_mongodb(parameter="pm25", collection='openaq2022')
 
     # Save data in CSV files
-    save_csv(data=no2, filename='no2_2022.csv')
-    save_csv(data=pm10, filename='pm10_2022.csv')
-    save_csv(data=pm25, filename='pm25_2022.csv')
+    save_csv(data=no2, filename='files/no2_2022.csv')
+    save_csv(data=pm10, filename='files/pm10_2022.csv')
+    save_csv(data=pm25, filename='files/pm25_2022.csv')
 
     # Draw maps from CSV files
-    draw_map(filename='no2_2022.csv')
-    draw_map(filename='pm10_2022.csv')
-    draw_map(filename='pm25_2022.csv')
+    draw_map(filename='files/no2_2022.csv')
+    draw_map(filename='files/pm10_2022.csv')
+    draw_map(filename='files/pm25_2022.csv')
