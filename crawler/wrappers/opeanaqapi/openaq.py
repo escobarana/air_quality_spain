@@ -17,7 +17,7 @@ class OpenaqAPIWrapper:
         :param count:   Current number of records retrieved
         :return:        Dictionary containing all the results
         """
-        content = self.do_request(f"{self.root_url}/measurements?date_from=2021-09-01&date_to=2021-09-30&limit=100"
+        content = self.do_request(f"{self.root_url}/measurements?date_from=2021-09-01&date_to=2021-09-30&limit=10000"
                                   f"&page={page}&offset=0&sort=desc&parameter=no2&parameter=pm10&parameter=pm25"
                                   f"&country_id=ES&order_by=location")
 
@@ -35,7 +35,7 @@ class OpenaqAPIWrapper:
         :param count:   Current number of records retrieved
         :return:        Dictionary containing all the results
         """
-        content = self.do_request(f"{self.root_url}/measurements?date_from=2022-09-01&date_to=2022-09-30&limit=100"
+        content = self.do_request(f"{self.root_url}/measurements?date_from=2022-09-01&date_to=2022-09-30&limit=10000"
                                   f"&page={page}&offset=0&sort=desc&parameter=no2&parameter=pm10&parameter=pm25"
                                   f"&country_id=ES&order_by=location")
 

@@ -2,7 +2,6 @@ from crawler.wrappers.opeanaqapi.exceptions import OpenaqApiException
 from crawler.wrappers.opeanaqapi.openaq import OpenaqAPIWrapper
 import logging
 import requests
-import json
 
 logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
