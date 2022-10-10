@@ -22,7 +22,7 @@ def get_measures_september_2021(rows_loaded: int = 0, page: int = 1) -> dict:
         measures = OpenaqAuthWrapper().openaq.get_measurements_2021(page=page)
 
         if len(measures['data']) > 0:
-            save_measures(data=measures['data'])
+            save_measures(data=measures['data'], collection='openaq2021')
         else:
             logger_obj.info(f'{api_name_const}: get_measures_september_2021: No available data')
 
@@ -66,7 +66,7 @@ def get_measures_september_2022(rows_loaded: int = 0, page: int = 1) -> dict:
         measures = OpenaqAuthWrapper().openaq.get_measurements_2022(page=page)
 
         if len(measures['data']) > 0:
-            save_measures(data=measures['data'])
+            save_measures(data=measures['data'], collection='openaq2022')
         else:
             logger_obj.info(f'{api_name_const}: get_measures_september_2022: No available data')
 
