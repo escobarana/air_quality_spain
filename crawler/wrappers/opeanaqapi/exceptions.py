@@ -9,33 +9,33 @@ class OpenaqApiException(Exception):
         :param request:  Request made to the API
         """
         if response.status_code == 429:
-            raise CallLimit("Call limit exceeded. Temporary block.", request)
+            raise CallLimitError("Call limit exceeded. Temporary block.", request)
         elif response.status_code == 422:
-            raise Validation("Validation error in the request", request)
+            raise ValidationError("Validation error in the request", request)
         elif response.status_code == 500:
-            raise InternalServer("Internal server error", request)
+            raise InternalServerError("Internal server error", request)
         elif response.status_code == 100:
-            raise MissingParam("Parameter error in the request", request)
+            raise MissingParamError("Parameter error in the request", request)
         else:
             raise UnknownException("Unknown exception occurred.", request)
 
 
-class CallLimit(Exception):
+class CallLimitError(Exception):
     def __init__(self, message, request):
         super().__init__({'message': message, 'request': request})
 
 
-class Validation(Exception):
+class ValidationError(Exception):
     def __init__(self, message, request):
         super().__init__({'message': message, 'request': request})
 
 
-class InternalServer(Exception):
+class InternalServerError(Exception):
     def __init__(self, message, request):
         super().__init__({'message': message, 'request': request})
 
 
-class MissingParam(Exception):
+class MissingParamError(Exception):
     def __init__(self, message, request):
         super().__init__({'message': message, 'request': request})
 

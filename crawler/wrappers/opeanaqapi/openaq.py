@@ -17,14 +17,14 @@ class OpenaqAPIWrapper:
         :param count:   Current number of records retrieved
         :return:        Dictionary containing all the results
         """
-        content = self.do_request(f"{self.root_url}/measurements?date_from=2021-09-01&date_to=2021-09-30&limit=1000"
-                                  f"&page={page}&offset=0&sort=desc&unit=&country_id=ES&order_by=location")
-        total_records = content['found']
-        num_page = content['page']
-        count += len(content['results'])
+        content = self.do_request(f"{self.root_url}/measurements?date_from=2021-09-01&date_to=2021-09-30&limit=100"
+                                  f"&page={page}&offset=0&sort=desc&parameter=no2&parameter=pm10&parameter=pm25"
+                                  f"&country_id=ES&order_by=location")
+
+        count += len(json.loads(content)['results'])
 
         return_dict = {"data": json.loads(content)['results'],
-                       "next_page": num_page+1 if count < total_records else None,
+                       "next_page": page+1 if json.loads(content)['results'] else None,
                        "current_count": count}
         return return_dict
 
@@ -35,13 +35,13 @@ class OpenaqAPIWrapper:
         :param count:   Current number of records retrieved
         :return:        Dictionary containing all the results
         """
-        content = self.do_request(f"{self.root_url}/measurements?date_from=2022-09-01&date_to=2022-09-30&limit=1000"
-                                  f"&page={page}&offset=0&sort=desc&unit=&country_id=ES&order_by=location")
-        total_records = content['found']
-        num_page = content['page']
-        count += len(content['results'])
+        content = self.do_request(f"{self.root_url}/measurements?date_from=2022-09-01&date_to=2022-09-30&limit=100"
+                                  f"&page={page}&offset=0&sort=desc&parameter=no2&parameter=pm10&parameter=pm25"
+                                  f"&country_id=ES&order_by=location")
+
+        count += len(json.loads(content)['results'])
 
         return_dict = {"data": json.loads(content)['results'],
-                       "next_page": num_page + 1 if count < total_records else None,
+                       "next_page": page + 1 if json.loads(content)['results'] else None,
                        "current_count": count}
         return return_dict

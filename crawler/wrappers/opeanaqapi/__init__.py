@@ -2,6 +2,7 @@ from crawler.wrappers.opeanaqapi.exceptions import OpenaqApiException
 from crawler.wrappers.opeanaqapi.openaq import OpenaqAPIWrapper
 import logging
 import requests
+import json
 
 logging.getLogger().setLevel(logging.INFO)
 logger = logging.getLogger(__name__)
@@ -26,9 +27,10 @@ class OpenaqAuthWrapper:
         :return:            JSON response of the call to the API or error message
         """
         logger.info(f"Doing request to {endpoint}")
-        resp = requests.get(endpoint, headers={"Accept": "application/json"})
+        headers = {"accept": "application/json"}
+        resp = requests.get(endpoint, headers=headers)
 
         if resp.status_code == 200:
-            return resp.content
+            return resp.text
         else:
             raise OpenaqApiException(resp, endpoint)
