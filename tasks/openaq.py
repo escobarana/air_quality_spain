@@ -1,7 +1,5 @@
-from celery import shared_task
 from crawler.wrappers.opeanaqapi import OpenaqAuthWrapper
 from writers.openaq import save_measures
-from django.conf import settings
 import logging
 
 logger_obj = logging.getLogger(__name__)
@@ -9,7 +7,6 @@ logger_obj = logging.getLogger(__name__)
 api_name_const = 'OpenAQ API: '
 
 
-@shared_task(autoretry_for=(Exception,), max_retries=settings.MAX_RETRIES, exponential_backoff=2, retry_jitter=True)
 def get_measures_september_2021(rows_loaded: int = 0, page: int = 1) -> dict:
     """
         Task function to load all data measures from september 2021 in the MongoDB database
@@ -34,9 +31,7 @@ def get_measures_september_2021(rows_loaded: int = 0, page: int = 1) -> dict:
 
         if next_page:
             # Paginate
-            get_measures_september_2021.apply_async(kwargs={"page": next_page,
-                                                            "rows_loaded": rows_loaded},
-                                                    priority=9)
+            get_measures_september_2021(page=next_page, rows_loaded=rows_loaded)
 
         else:
             logger_obj.info(
@@ -53,7 +48,6 @@ def get_measures_september_2021(rows_loaded: int = 0, page: int = 1) -> dict:
         return {'status': 'error', 'message': api_name_const + ': ' + status_detail}
 
 
-@shared_task(autoretry_for=(Exception,), max_retries=settings.MAX_RETRIES, exponential_backoff=2, retry_jitter=True)
 def get_measures_september_2022(rows_loaded: int = 0, page: int = 1) -> dict:
     """
         Task function to load all data measures from september 2022 in the MongoDB database
@@ -78,9 +72,7 @@ def get_measures_september_2022(rows_loaded: int = 0, page: int = 1) -> dict:
 
         if next_page:
             # Paginate
-            get_measures_september_2021.apply_async(kwargs={"page": next_page,
-                                                            "rows_loaded": rows_loaded},
-                                                    priority=9)
+            get_measures_september_2022(page=next_page, rows_loaded=rows_loaded)
 
         else:
             logger_obj.info(

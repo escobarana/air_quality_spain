@@ -13,6 +13,8 @@ def draw_map(filename: str):
 
     df = pd.read_csv(filename)  # CSV containing current air quality
 
+    df["city"] = df["city"].replace(np.nan, "unknown")
+
     layer = pdk.Layer(
         'HeatmapLayer',
         data=df,
@@ -23,9 +25,9 @@ def draw_map(filename: str):
     )
 
     view_state = pdk.ViewState(
-        latitude=np.average(50.282187223911),  # Center of the map (Belgium)
-        longitude=np.average(5.12971807481202),  # Center of the map (Belgium)
-        zoom=7,
+        latitude=np.average(40.1672199994705),  # Center of the map (Madrid)
+        longitude=np.average(-3.27667),         # Center of the map (Madrid)
+        zoom=5,
         pitch=40.5,
         bearing=-27.36
     )
